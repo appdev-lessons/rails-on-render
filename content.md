@@ -34,9 +34,54 @@ services:
 
 Commit and push this change to your repository to proceed.
 
-### Credentials and key
+### Credentials and master key
 
-In order to 
+When we create a new Rails app a file called `credentials.yml.enc` is added to the `config` directory. This file contains some of the application's sensitive information in an encrypted format. Some of that information is required by Render to properly deploy the app. In order for Render to decrypt the file, we need a key stored in a `config/master.key`. 
+
+We haven't provided this key for your app, so you will need to follow these steps.
+
+First, run this command at your bash prompt to create a backup copy of the old `config/credentials.yml.enc` file:
+
+<aside markdown="1">
+
+`cp <file-name-1> <file-name-2>` is bash-speak for "copy file-1 to file-2"
+</aside>
+
+```
+% cp config/credentials.yml.enc config/credentials.yml.enc.backup
+```
+
+You will now see two files in your `config/` folder. Delete the original file (not the `.backup`):
+
+![](/assets/delete-original-credentials.png)
+
+Now, run this command at the bash prompt:
+
+```
+% EDITOR="code --wait" rails credentials:edit
+```
+
+That will open a temporary file in your editor window in a new tab. Copy and paste the entire contents of your backed up credentials from `config/credentials.yml.enc.backup` into this new file (overwriting anything that is already shown in the file). Then save the file, and close the editor tab with the name `XXXX.credentials.yml`:
+
+![](/assets/replace-new-credentials.png)
+
+You should now also delete the the `config/credentials.yml.enc.backup`, such that your `config/` folder looks something like this:
+
+---
+
+![](/assets/updated-config-folder.png)
+
+---
+
+Note the two files I've highlighted that were created by this process:
+
+- A new `credentials.yml.enc` file: This is the encrypted file that will be decrypted with...
+- the new `master.key` file.
+
+The `master.key` file has a light gray, muted color. That's because it is included in our `.gitignore` file. We never want to publish this key to GitHub, and we won't make that mistake by `.gitignore`-ing the file! That `master.key` will be stored safely in our codespace, but you may also want to copy it to another secure location in case your codespace is eventually deleted due to inactivity.
+
+Now you can run a git commit and push to save the new `credentials.yml.enc` file. (This one is encrypted, so we can store it on GitHub.)
+
 
 
 ## Deploying a database-backed Rails app
