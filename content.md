@@ -16,6 +16,8 @@ If you decide to host larger apps, and want something more powerful to serve rea
 
 ## Deploying a non-database Rails app
 
+These are the first steps you should take to deploy any Rails app on Render; even ones like "Rock, Paper, Scissors" that don't have a database.
+
 ### Update the `render.yaml` file
 
 As in the previous render guide, let's set up the `render.yaml` file in your project repository. This file tells Render how to manage your app's deployment.
