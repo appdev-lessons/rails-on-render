@@ -56,6 +56,7 @@ First, run this command at your bash prompt to create a backup copy of the old `
 You will now see two files in your `config/` folder. Delete the original file (not the `.backup`):
 
 ![](/assets/delete-original-credentials.png)
+{: .bleed-full }
 
 Now, run this command at the bash prompt:
 
@@ -66,6 +67,7 @@ Now, run this command at the bash prompt:
 That will open a temporary file in your editor window in a new tab. Copy and paste the entire contents of your backed up credentials from `config/credentials.yml.enc.backup` into this new file (overwriting anything that is already shown in the file). Then save the file, and close the editor tab with the name `XXXX.credentials.yml`:
 
 ![](/assets/replace-new-credentials.png)
+{: .bleed-full }
 
 You should now also delete the the `config/credentials.yml.enc.backup`, such that your `config/` folder looks something like this:
 
