@@ -110,7 +110,7 @@ Looking to deploy an app that has a database? Read the next section for the addi
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Databases on the free plan are deleted after 90 days. If you plan to use your app beyond 90 days, consider upgrading to a paid plan.
+Databases on the free plan are deleted after 90 days. Also, free plans are only eligible to have one database. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan.
 </div>
 
 <aside markdown="1">
