@@ -82,7 +82,10 @@ Note the two files I've highlighted that were created by this process:
 - A new `credentials.yml.enc` file: This is the encrypted file that will be decrypted with...
 - the new `master.key` file.
 
+<div class="bg-red-100 py-1 px-5" markdown="1">
+
 The `master.key` file has a light gray, muted color. That's because it is included in our `.gitignore` file. We never want to publish this key to GitHub, and we won't make that mistake by `.gitignore`-ing the file! That `master.key` will be stored safely in our codespace, but you may also want to copy it to another secure location in case your codespace is eventually deleted due to inactivity.
+</div>
 
 Now you can run a git commit and push to save the new `credentials.yml.enc` file. (This one is encrypted, so we can store it on GitHub.)
 
