@@ -86,7 +86,22 @@ The `master.key` file has a light gray, muted color. That's because it is includ
 
 Now you can run a git commit and push to save the new `credentials.yml.enc` file. (This one is encrypted, so we can store it on GitHub.)
 
+### Deploy to Render
 
+With our credentials and `master.key` setup, it's time to deploy!
+
+Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/214#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/214#deploy-your-blueprint).
+
+Once you've done that, there's another step to take in the dashboard for your app.
+
+Visit [dashboard.render.com](https://dashboard.render.com/) and open the app you just created. Go to the "Environment" tab, and in the "Environment Variables" add a key called `RAILS_MASTER_KEY` with the value copy-pasted over from your `config/master.key` file. Be sure to "Save Changes" when you've done so:
+
+![](/assets/set-master-key-env-on-render.png)
+{: .bleed-full }
+
+This will trigger another deployment of your app (visit the "Events" tab to view the progress). When the deployment finishes, your app will be live!
+
+Looking to deploy an app that has a database? Read the next section for the additional steps to take there!
 
 ## Deploying a database-backed Rails app
 
