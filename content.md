@@ -42,18 +42,7 @@ When we create a new Rails app a file called `credentials.yml.enc` is added to t
 
 We haven't provided this key for your app, so you will need to follow these steps.
 
-First, run this command at your bash prompt to create a backup copy of the old `config/credentials.yml.enc` file:
-
-<aside markdown="1">
-
-`cp <file-name-1> <file-name-2>` is bash-speak for "copy file-1 to file-2"
-</aside>
-
-```
-% cp config/credentials.yml.enc config/credentials.yml.enc.backup
-```
-
-You will now see two files in your `config/` folder. Delete the original file (not the `.backup`):
+First, delete the `config/credentials.yml.enc` file, since we will generate a new one:
 
 ![](/assets/delete-original-credentials.png)
 {: .bleed-full }
@@ -64,12 +53,12 @@ Now, run this command at the bash prompt:
 % EDITOR="code --wait" rails credentials:edit
 ```
 
-That will open a temporary file in your editor window in a new tab. Copy and paste the entire contents of your backed up credentials from `config/credentials.yml.enc.backup` into this new file (overwriting anything that is already shown in the file). Then save the file, and close the editor tab with the name `XXXX.credentials.yml`:
+That will open a temporary file in your editor window in a new tab. This temporary file displays the `secret_key_base` that will be encrypted by the new `credentials.yml.enc` file. Once you've had a look at the file, you can simply close it in the editor tab (that file will be erased once you close it):
 
-![](/assets/replace-new-credentials.png)
+![](/assets/new-credentials.png)
 {: .bleed-full }
 
-You should now also delete the the `config/credentials.yml.enc.backup`, such that your `config/` folder looks something like this:
+After you close that temporary file, your `config/` folder looks something like this:
 
 ---
 
@@ -84,7 +73,9 @@ Note the two files I've highlighted that were created by this process:
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-The `master.key` file has a light gray, muted color. That's because it is included in our `.gitignore` file. We never want to publish this key to GitHub, and we won't make that mistake by `.gitignore`-ing the file! That `master.key` will be stored safely in our codespace, but you may also want to copy it to another secure location in case your codespace is eventually deleted due to inactivity.
+The `master.key` file has a light gray, muted color. That's because it is included in our `.gitignore` file. We never want to publish this key to GitHub, and we won't make that mistake since we are `.gitignore`-ing the file! 
+
+That `master.key` will be stored safely in our codespace, but you should also copy it to another secure location in case your codespace is eventually deleted due to inactivity. Now could be a great time to start using a password manager like [Bitwarden](https://bitwarden.com/) to safely store information like this. (Bitwarden and other password managers aren't limited to passwords; you can store other sensitive information like API keys there.)
 </div>
 
 Now you can run a git commit and push to save the new `credentials.yml.enc` file. (This one is encrypted, so we can store it on GitHub.)
@@ -104,7 +95,9 @@ Visit [dashboard.render.com](https://dashboard.render.com/) and open the app you
 
 This will trigger another deployment of your app (visit the "Events" tab to view the progress). When the deployment finishes, your app will be live!
 
-Looking to deploy an app that has a database? Read the next section for the additional steps to take there!
+---
+
+Are you looking to deploy an app that has a database? Read the next section for the additional steps to take there!
 
 ## Deploying a database-backed Rails app
 
