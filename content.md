@@ -2,7 +2,7 @@
 
 Congratulations! You've built a web application using Ruby on Rails, and now it's time to share it with the world. In this guide, we'll walk you through the process of deploying your Rails app on the internet using [Render](https://render.com). 
 
-This guide is similar to [our previous guide](https://learn.firstdraft.com/lessons/114-deploying-to-render) for deploying static and dynamic Sinatra apps, so you may want to quickly review that guide (i.e. be sure you have a Render account and you understand how to deploy from a Blueprint before you proceed).
+This guide is similar to [our previous guide](https://learn.firstdraft.com/lessons/214-deploying-to-render) for deploying static and dynamic Sinatra apps, so you may want to quickly review that guide (i.e. be sure you have a Render account and you understand how to deploy from a Blueprint before you proceed).
 
 Specifically, this guide covers deploying a **database-backed** app. But first, let's see how to deploy a Rails app that does not have a database.
 
@@ -107,7 +107,7 @@ Looking to deploy an app that has a database? Read the next section for the addi
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Please note that databases on the free plan are deleted after 90 days. If you plan to use your app beyond 90 days, consider upgrading to a paid plan.
+Databases on the free plan are deleted after 90 days. If you plan to use your app beyond 90 days, consider upgrading to a paid plan.
 </div>
 
 <aside markdown="1">
