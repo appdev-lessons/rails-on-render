@@ -57,11 +57,7 @@ and use the "Generate" button to create a new value:
 
 Once you have this new value set, save the changes:
 
----
-
 ![](/assets/set-secret-key-base-2.png)
-
----
 
 This will trigger another deployment of your app (visit the "Events" tab to view the progress). When the deployment finishes, your app will be live!
 
