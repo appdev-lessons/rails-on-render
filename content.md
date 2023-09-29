@@ -2,7 +2,7 @@
 
 Congratulations! You've built a web application using Ruby on Rails, and now it's time to share it with the world. In this guide, we'll walk you through the process of deploying your Rails app on the internet using [Render](https://render.com). 
 
-This guide is similar to [our previous guide](https://learn.firstdraft.com/lessons/214-deploying-to-render) for deploying static and dynamic Sinatra apps, so you may want to quickly review that guide (i.e. be sure you have a Render account and you understand how to deploy from a Blueprint before you proceed).
+This guide is similar to [our previous guide](https://learn.firstdraft.com/lessons/114-deploying-to-render) for deploying static and dynamic Sinatra apps, so you may want to quickly review that guide (i.e. be sure you have a Render account and you understand how to deploy from a Blueprint before you proceed).
 
 Specifically, this guide covers deploying a **database-backed** app. But first, let's see how to deploy a Rails app that does not have a database.
 
@@ -47,7 +47,7 @@ Commit and push any `render.yaml` changes to your repository to proceed.
 
 ### Deploy to Render
 
-Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/214#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/214#deploy-your-blueprint).
+Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#deploy-your-blueprint).
 
 When the deployment finishes, your app will be live!
 
@@ -116,7 +116,7 @@ These lines are specific to a full-fledged, database-backed Rails app, and will 
 
 After you make the changes to `render.yaml` and `bin/render-build.sh` (**and git commit and push those changes**): 
 
-Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/214#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/214#deploy-your-blueprint).
+Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#deploy-your-blueprint).
 
 This time around, you will see that Render is not only going to create a "Web Service", but also a "Database" for us. If you don't see the two services, then you may not have setup your `render.yaml` file correctly in the previous step:
 
