@@ -70,7 +70,7 @@ Since we can only deploy one database-backed app for free on Render, we need to 
 Detailed instructions on creating Blueprints can be found in the [Render Docs](https://render.com/docs/deploy-rails#deploy-to-render). You will note some differences between their guide and ours, which is more beginner friendly.
 </aside>
 
-```yaml{3,8-18}
+```yaml{3,11-18}
 services:
   - type: web
     name: MYAPPNAME # the name of this service, eg hello-world
