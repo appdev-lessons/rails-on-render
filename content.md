@@ -16,35 +16,118 @@ If you decide to host larger apps, and want something more powerful to serve rea
 
 ## Deploying a non-database Rails app
 
+These are the first steps you should take to deploy any Rails app on Render; even ones like "Rock, Paper, Scissors" that don't have a database.
+
+### Update the `render.yaml` file
+
 As in the previous render guide, let's set up the `render.yaml` file in your project repository. This file tells Render how to manage your app's deployment.
 
-Create a new file named `render.yaml` in your project root directory and replace `MYAPPNAME` with your application's name (e.g. `hello-world` or something else; only use letters and dashes in the name, no spaces).
+Open the file called `render.yaml` in your codespace (you should see it on the left panel file explorer in the root directory, i.e. not in a sub-folder). 
 
-```yaml{3}
+If you don't find the file, you can create it, and _carefully_ copy and paste this code into that new `render.yaml` file:
+
+```yaml{3,8-10}
 services:
   - type: web
-    name: MYAPPNAME # the name of this service, eg your app name
+    name: MYAPPNAME # the name of this service, eg hello-world
     env: ruby # this app is written in ruby
     plan: free # make sure to set this to free or you'll get billed $$$
     buildCommand: "./bin/render-build.sh" # we already created these two files for you
-    startCommand: "./bin/render-start.sh" 
+    startCommand: "./bin/render-start.sh"
+    envVars: # this section sets some ENV variables needed by Render for deployment
+      - key: SECRET_KEY_BASE
+        generateValue: true
 ```
 
-Commit and push this change to your repository to proceed.
+Make one change to this file: replace `MYAPPNAME` with your application's name (e.g. `rock-paper-scissors` or something else; only use letters and dashes in the name, no spaces). 
 
-In order to 
+Also, note the new section in this Rails-specific `render.yaml`: We need to tell Render to set a `SECRET_KEY_BASE` environment variable when we deploy. _You don't need to make any changes to these lines_. This step allows the production app to decrypt any credentials we might have encrypted in the `config/credentials.yml.enc` file.
 
+Commit and push any `render.yaml` changes to your repository to proceed.
+
+### Deploy to Render
+
+Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#deploy-your-blueprint).
+
+When the deployment finishes, your app will be live!
+
+---
+
+Are you seeking to deploy an app that has a database? Read the next section for the additional steps to take there!
 
 ## Deploying a database-backed Rails app
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Please note that databases on the free plan are deleted after 90 days. If you plan to use your app beyond 90 days, consider upgrading to a paid plan.
+Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. Alternatively, you can use Fly, but you will just need to enter some credit card information for verification purposes. See [our Rails Fly guide for those steps](https://learn.firstdraft.com/lessons/107-deploying-to-fly#deploying-a-database-backed-rails-app).
 </div>
 
+### Update the `render.yaml` file
+
+Since we can only deploy one database-backed app for free on Render, we need to add to our `render.yaml` file:
+
 <aside markdown="1">
-Detailed instructions on creating Blueprints can be found in the [Render Docs](https://render.com/docs/deploy-rails#deploy-to-render).
+Detailed instructions on creating Blueprints can be found in the [Render Docs](https://render.com/docs/deploy-rails#deploy-to-render). You will note some differences between their guide and ours, which is more beginner friendly.
 </aside>
 
+```yaml{3,11-18}
+services:
+  - type: web
+    name: MYAPPNAME # the name of this service, eg hello-world
+    env: ruby # this app is written in ruby
+    plan: free # make sure to set this to free or you'll get billed $$$
+    buildCommand: "./bin/render-build.sh" # # we already created these two files for you
+    startCommand: "./bin/render-start.sh"
+    envVars: # this section sets some ENV variables needed by Render for deployment
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: db
+          property: connectionString
+databases: # this section provides some additional database configuration
+  - name: db
+    plan: free
+    ipAllowList: []
+```
+
+In addition to generating a `SECRET_KEY_BASE`, you need to add a `DATABASE_URL` environment variable and configure it properly by _carefully_ copy-pasting the above `render.yaml` changes into your file. Again, the only thing you need to change in this file is the `MYAPPNAME` to a name of your choosing (e.g. `msm-queries`).
+
+### Updating the `bin/render-build.sh` file
+
+There's one more step to take. Open the `bin/render-build.sh` file in your project repository and uncomment the last three lines:
+
+```bash{8-10}
+#!/usr/bin/env bash
+# exit on error
+set -o errexit
+
+bundle install
+
+# For Ruby on Rails apps uncomment these lines to precompile assets and migrate your database.
+bundle exec rake assets:precompile
+bundle exec rake assets:clean
+bundle exec rake db:migrate
+```
+
+These lines are specific to a full-fledged, database-backed Rails app, and will make sure that the app deploys correctly and the database migration is run.
+
+### Deploy to Render
+
+After you make the changes to `render.yaml` and `bin/render-build.sh` (**and git commit and push those changes**): 
+
+Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/114-deploying-to-render#deploy-your-blueprint).
+
+This time around, you will see that Render is not only going to create a "Web Service", but also a "Database" for us. If you don't see the two services, then you may not have setup your `render.yaml` file correctly in the previous step:
+
+![](/assets/creating-db-and-webservice.png)
+{: .bleed-full }
+
+If you have already setup one free database-backed app (the `plan: free` option in the `render.yaml` section for `database:`), then you will be asked to "Update Existing Resource". You will need to either: remove the other database, pay for a new database, or use an alternative deployment service that offers more free databases with some other caveats (i.e. Fly, which requires credit card information on file):
+
+![](/assets/no-second-free-db.png)
+{: .bleed-full }
+
+When the deployment finishes, your app will be live!
 
 ---
