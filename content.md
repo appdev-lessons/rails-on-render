@@ -123,6 +123,11 @@ This time around, you will see that Render is not only going to create a "Web Se
 ![](/assets/creating-db-and-webservice.png)
 {: .bleed-full }
 
+If you have already setup one free database-backed app (the `plan: free` option in the `render.yaml` section for `database:`), then you will be asked to "Update Existing Resource". You will need to either: remove the other database, pay for a new database, or use an alternative deployment service that offers more free databases with some other caveats (i.e. Fly, which requires credit card information on file):
+
+![](/assets/no-second-free-db.png)
+{: .bleed-full }
+
 When the deployment finishes, your app will be live!
 
 ---
