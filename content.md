@@ -39,7 +39,9 @@ services:
         generateValue: true
 ```
 
-Make one change to this file: replace `MYAPPNAME` with your application's name (e.g. `rock-paper-scissors` or something else; only use letters and dashes in the name, no spaces). Also, note the new section in this Rails-specific `render.yaml`: We need to tell Render to set a `SECRET_KEY_BASE` environment variable when we deploy. This step allows the production app to decrypt any credentials we might have encrypted in the `config/credentials.yml.enc` file.
+Make one change to this file: replace `MYAPPNAME` with your application's name (e.g. `rock-paper-scissors` or something else; only use letters and dashes in the name, no spaces). 
+
+Also, note the new section in this Rails-specific `render.yaml`: We need to tell Render to set a `SECRET_KEY_BASE` environment variable when we deploy. _You don't need to make any changes to these lines_. This step allows the production app to decrypt any credentials we might have encrypted in the `config/credentials.yml.enc` file.
 
 Commit and push any `render.yaml` changes to your repository to proceed.
 
