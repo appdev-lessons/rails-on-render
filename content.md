@@ -42,16 +42,28 @@ Return to the previous guide, and follow the steps to [create a new Blueprint](h
 
 Once you've done that, there's another step to take in the dashboard for your app.
 
-Visit [dashboard.render.com](https://dashboard.render.com/) and open the app you just created. Go to the "Environment" tab, and in the "Environment Variables" add a key called `RAILS_MASTER_KEY` with the value copy-pasted over from your `config/master.key` file. Be sure to "Save Changes" when you've done so:
+Visit [dashboard.render.com](https://dashboard.render.com/) and open the app you just created. Go to the "Environment" tab, and in the "Environment Variables" add a key called: 
 
-![](/assets/set-master-key-env-on-render.png)
+`SECRET_KEY_BASE` 
+
+and use the "Generate" button to create a new value:
+
+![](/assets/set-secret-key-base-1.png)
 {: .bleed-full }
+
+Once you have this new value set, save the changes:
+
+---
+
+![](/assets/set-secret-key-base-2.png)
+
+---
 
 This will trigger another deployment of your app (visit the "Events" tab to view the progress). When the deployment finishes, your app will be live!
 
 ---
 
-Are you looking to deploy an app that has a database? Read the next section for the additional steps to take there!
+Are you seeking to deploy an app that has a database? Read the next section for the additional steps to take there!
 
 ## Deploying a database-backed Rails app
 
