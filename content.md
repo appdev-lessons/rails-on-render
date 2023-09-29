@@ -59,7 +59,7 @@ Are you seeking to deploy an app that has a database? Read the next section for 
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. Alternatively, you can use Fly, but you will just need to enter some credit card information for verification purposes. See [our Rails Fly guide for those steps](TODO)
+Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. Alternatively, you can use Fly, but you will just need to enter some credit card information for verification purposes. See [our Rails Fly guide for those steps](TODO).
 </div>
 
 ### Update the `render.yaml` file
@@ -67,7 +67,7 @@ Databases on the free plan are deleted after **90 days**. Also, free plans are o
 Since we can only deploy one database-backed app for free on Render, we need to add to our `render.yaml` file:
 
 <aside markdown="1">
-Detailed instructions on creating Blueprints can be found in the [Render Docs](https://render.com/docs/deploy-rails#deploy-to-render).
+Detailed instructions on creating Blueprints can be found in the [Render Docs](https://render.com/docs/deploy-rails#deploy-to-render). You will note some differences between their guide and ours, which is more beginner friendly.
 </aside>
 
 ```yaml{3,8-18}
