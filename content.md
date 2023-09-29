@@ -36,53 +36,7 @@ services:
 
 Commit and push this change to your repository to proceed.
 
-### Credentials and master key
-
-When we create a new Rails app a file called `credentials.yml.enc` is added to the `config` directory. This file contains some of the application's sensitive information in an encrypted format. Some of that information is required by Render to properly deploy the app. In order for Render to decrypt the file, we need a key stored in a `config/master.key`. 
-
-We haven't provided this key for your app, so you will need to follow these steps.
-
-First, delete the `config/credentials.yml.enc` file, since we will generate a new one:
-
-![](/assets/delete-original-credentials.png)
-{: .bleed-full }
-
-Now, run this command at the bash prompt:
-
-```
-% EDITOR="code --wait" rails credentials:edit
-```
-
-That will open a temporary file in your editor window in a new tab. This temporary file displays the `secret_key_base` that will be encrypted by the new `credentials.yml.enc` file. Once you've had a look at the file, you can simply close it in the editor tab (that file will be erased once you close it):
-
-![](/assets/new-credentials.png)
-{: .bleed-full }
-
-After you close that temporary file, your `config/` folder looks something like this:
-
----
-
-![](/assets/updated-config-folder.png)
-
----
-
-Note the two files I've highlighted that were created by this process:
-
-- A new `credentials.yml.enc` file: This is the encrypted file that will be decrypted with...
-- the new `master.key` file.
-
-<div class="bg-red-100 py-1 px-5" markdown="1">
-
-The `master.key` file has a light gray, muted color. That's because it is included in our `.gitignore` file. We never want to publish this key to GitHub, and we won't make that mistake since we are `.gitignore`-ing the file! 
-
-That `master.key` will be stored safely in our codespace, but you should also copy it to another secure location in case your codespace is eventually deleted due to inactivity. Now could be a great time to start using a password manager like [Bitwarden](https://bitwarden.com/) to safely store information like this. (Bitwarden and other password managers aren't limited to passwords; you can store other sensitive information like API keys there.)
-</div>
-
-Now you can run a git commit and push to save the new `credentials.yml.enc` file. (This one is encrypted, so we can store it on GitHub.)
-
 ### Deploy to Render
-
-With our credentials and `master.key` setup, it's time to deploy!
 
 Return to the previous guide, and follow the steps to [create a new Blueprint](https://learn.firstdraft.com/lessons/214#create-a-new-blueprint) and then [deploy the Blueprint](https://learn.firstdraft.com/lessons/214#deploy-your-blueprint).
 
