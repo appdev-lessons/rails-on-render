@@ -22,7 +22,9 @@ These are the first steps you should take to deploy any Rails app on Render; eve
 
 As in the previous render guide, let's set up the `render.yaml` file in your project repository. This file tells Render how to manage your app's deployment.
 
-Create a new file named `render.yaml` in your project root directory if you do not find one there already and replace `MYAPPNAME` with your application's name (e.g. `hello-world` or something else; only use letters and dashes in the name, no spaces).
+Open the file called `render.yaml` in your codespace (you should see it on the left panel file explorer in the root directory, i.e. not in a sub-folder). 
+
+If you don't find the file, you can create it, and _carefully_ copy and paste this code into that new `render.yaml` file:
 
 ```yaml{3}
 services:
@@ -33,6 +35,8 @@ services:
     buildCommand: "./bin/render-build.sh" # we already created these two files for you
     startCommand: "./bin/render-start.sh" 
 ```
+
+Make one change to this file: replace `MYAPPNAME` with your application's name (e.g. `rock-paper-scissors` or something else; only use letters and dashes in the name, no spaces).
 
 Commit and push this change to your repository to proceed.
 
