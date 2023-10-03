@@ -63,7 +63,7 @@ Are you seeking to deploy an app that has a database? Read the next section for 
 
 Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. 
 
-Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). The last section below details those additional steps.
+Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). The last section below details those additional steps; but you should begin by following the steps immediately below to deploy with a database, and then later you can connect the external database.
 </div>
 
 ### Update the `render.yaml` file
