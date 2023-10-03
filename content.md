@@ -186,4 +186,9 @@ This will trigger a new deployment of your app, and now your live app will be co
 
 **Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. 
 
+Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. **This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step.** Your database and contents were not deleted by the step, you only deleted (well, _exchanged_) the connection to the database!
+
+![](/assets/internal-db-connection.png)
+{: .bleed-full }
+
 ---
