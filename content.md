@@ -51,6 +51,8 @@ Return to the previous guide, and follow the steps to [create a new Blueprint](h
 
 When the deployment finishes, your app will be live!
 
+Remember, you can interact with you app anytime on your [Render dashboard](https://dashboard.render.com/).
+
 ---
 
 Are you seeking to deploy an app that has a database? Read the next section for the additional steps to take there!
@@ -59,7 +61,9 @@ Are you seeking to deploy an app that has a database? Read the next section for 
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. Alternatively, you can use Fly, but you will just need to enter some credit card information for verification purposes. See [our Rails Fly guide for those steps](https://learn.firstdraft.com/lessons/107-deploying-to-fly#deploying-a-database-backed-rails-app).
+Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. 
+
+Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). The last section below details those additional steps.
 </div>
 
 ### Update the `render.yaml` file
@@ -129,5 +133,57 @@ If you have already setup one free database-backed app (the `plan: free` option 
 {: .bleed-full }
 
 When the deployment finishes, your app will be live!
+
+Because we set Render to deploy from our `main` branch and connected the app with the GitHub repository, anytime you make a change to your app and commit and push that change, the live app will re-deploy with your updates!
+
+Remember, you can interact with you app anytime on your [Render dashboard](https://dashboard.render.com/).
+
+<div class="bg-red-100 py-1 px-5" markdown="1">
+
+Before you begin CRUDing in your live app to add records to the database, consider whether you want the database around for longer than 90 days. If you do want your records to persist and not be deleted (and not have to pay), then follow the steps in the next section to connect a free, persistent ElephantSQL database.
+</div>
+
+### Connect an external database with ElephantSQL
+
+Your free database provided by Render will be deleted after 90 days if you do not upgrade to a paid plan. 
+
+As an alternative to paying, follow these steps to connect a free, external database provided by [ElephantSQL](https://www.elephantsql.com/) to your deployed Render app. This database will not be deleted!
+
+First follow the steps in [this guide from ElephantSQL](https://www.elephantsql.com/docs/index.html) to:
+
+- Sign up with your GitHub account
+- Create a "New instance"
+- Use the plan "Tiny Turtle (Free)", and provide a name (e.g. `my-app-name`)
+- Select a region (choose a region nearby you for low latency)
+- After you complete the steps, you should be brought to a dashboard page where you can find a URL that looks something like this:
+
+```
+postgres://eeumptim:hs9gFCEPdot6iZyT7Zm_1O-toJAZFlqu@bubble.db.elephantsql.com/eeumptim
+```
+
+<aside markdown="1">
+The format of that is standard for database connections and breaks down to:
+
+```
+postgres://username:password@hostname/databasename
+```
+</aside>
+
+Once you have that long URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
+
+- Delete the current `DATABASE_URL` environment variable with the trash icon
+- Click "Add Environment Variable"
+- Create a new variable, again with the key `DATABASE_URL`, but this time with the value taken from ElephantSQL (e.g. `postgres://username:password@hostname/databasename`)
+- Click "Save Changes"
+
+![](/assets/delete-free-db-url.png)
+{: .bleed-full }
+
+This will trigger a new deployment of your app, and now your live app will be connected to the database on ElephantSQL. At this point, you could even delete the old database from your Render dashboard:
+
+![](/assets/delete-free-db.png)
+{: .bleed-full }
+
+**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. 
 
 ---
