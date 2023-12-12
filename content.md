@@ -191,4 +191,25 @@ Similar to how you connected your external database, Render also provides you wi
 ![](/assets/internal-db-connection.png)
 {: .bleed-full }
 
+## Database Backups
+
+
+- On render
+- On Elephant
+
+
+## Migrating Databases
+
+- On render
+- On elephant
+
+![](/assets/elephant-sql-details-page.png)
+{: .bleed-full }
+
+## Background Scheduled Jobs
+
+
+
+## Continuous Deployment
+
 ---
