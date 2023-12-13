@@ -169,6 +169,14 @@ postgres://username:password@hostname/databasename
 ```
 </aside>
 
+![](/assets/elephant-sql-details-page.png)
+{: .bleed-full }
+
+<div class="bg-red-100 py-1 px-5" markdown="1">
+
+Note the "Max database size" on the Tiny Turtle free plan is only 20 MB. This is pretty small, and as your app and database grows, you may hit this limit fairly quickly. In that case, follow the steps later in this guide on [Migrating Databases](#migrating-databases).
+</div>
+
 Once you have that long URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
 
 - Delete the current `DATABASE_URL` environment variable with the trash icon
