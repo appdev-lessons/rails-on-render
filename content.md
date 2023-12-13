@@ -215,14 +215,14 @@ You can access database backups on Render by navigating to the database on your 
 To access backups on your free ElephantSQL instance, navigate to the details page for your DB, and click "Backup [db name] now". Refresh the page after a moment and you should see your new backup available for download:
 
 ![](/assets/elephant-sql-backups-1.png)
-
+{: .bleed-full }
 
 ## Migrating Databases
 
 - On render
 - On elephant
 
-![](/assets/elephant-sql-details-page.png)
+
 
 ## Background Scheduled Jobs
 
