@@ -191,9 +191,9 @@ This will trigger a new deployment of your app, and now your live app will be co
 ![](/assets/delete-free-db.png)
 {: .bleed-full }
 
-**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. 
+**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. See the section below on [Migrating Databases](#migrating-databases){: target="_self" } for those steps.
 
-Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. **This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step.** Your database and contents were not deleted by the step, you only deleted (well, _exchanged_) the connection to the database!
+Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step. Your database and contents were _not deleted_ by that ENV variable step, you only _exchanged_ the connection to the database!
 
 ![](/assets/internal-db-connection.png)
 {: .bleed-full }
@@ -204,7 +204,7 @@ Database backups are critical for any long term deployment. Render supplies robu
 
 - As a safety net, protecting your data from accidental deletions, updates, or other data corruptions. 
 - As a way to revert your database to a previous state.
-- As a way to migrate your database to another platform (e.g. ElephantSQL, Heroku, Fly, etc.)
+- As a way to migrate your database between platforms (e.g. ElephantSQL, Heroku, Fly, etc.)
 
 ### Backups on Render
 
