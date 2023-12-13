@@ -173,7 +173,7 @@ where the username and database name are typically identical.
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Note the "Max database size" on the Tiny Turtle free plan is only 20 MB. This is pretty small, and as your app and database grows you may hit this limit fairly quickly. In that case, follow the steps later in this guide on [Migrating Databases](#migrating-databases){: target="_self" } back to Render, and upgrading to a paid plan there. Unfortunately, when your database starts to grow there's no free lunch!
+Note the "Max database size" on the Tiny Turtle free plan is only 20 MB. This is pretty small, and as your app and database grows you may hit this limit fairly quickly. In that case, follow the steps later in this guide on [Database Backups and Migrations](#database-backups-and-migrations){: target="_self" } back to Render, and upgrading to a paid plan there. Unfortunately, when your database starts to grow there's no free lunch!
 </div>
 
 Once you have that URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
@@ -191,14 +191,14 @@ This will trigger a new deployment of your app, and now your live app will be co
 ![](/assets/delete-free-db.png)
 {: .bleed-full }
 
-**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. See the section below on [Migrating Databases](#migrating-databases){: target="_self" } for those steps.
+**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. See the section below on [Database Backups and Migrations](#database-backups-and-migrations){: target="_self" } for those steps.
 
 Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step. Your database and contents were _not deleted_ by that ENV variable step, you only _exchanged_ the connection to the database!
 
 ![](/assets/internal-db-connection.png)
 {: .bleed-full }
 
-## Database Backups
+## Database Backups and Migrations
 
 Render supplies robust infrastructure for hosting applications, but ensuring the integrity and availability of your data is still important. Among other reasons, backups are important:
 
@@ -217,7 +217,7 @@ To access backups on your free ElephantSQL instance, navigate to the details pag
 ![](/assets/elephant-sql-backups-1.png)
 {: .bleed-full }
 
-## Migrating Databases
+### Migrating Database from ElephantSQL to Render
 
 - On render
 - On elephant
