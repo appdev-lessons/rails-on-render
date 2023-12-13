@@ -61,9 +61,9 @@ Are you seeking to deploy an app that has a database? Read the next section for 
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. 
+Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. You can always upgrade your plan at a later point, so you can begin with the free offering, and later upgrade to a $7/month starter plan, which is sufficient for most side projects.
 
-Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). The last section below details those additional steps; but you should begin by following the steps immediately below to deploy with a database, and then later you can connect the external database.
+Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). Keep reading to see details on those additional ElephantSQL steps; but you should begin by following the steps immediately below to deploy with a database, and then later you can connect the external ElephantSQL database if you so choose.
 </div>
 
 ### Update the `render.yaml` file
@@ -158,37 +158,94 @@ First follow the steps in [this guide from ElephantSQL](https://www.elephantsql.
 - After you complete the steps, you should be brought to a dashboard page where you can find a URL that looks something like this:
 
 ```
-postgres://eeumptim:hs9gFCEPdot6iZyT7Zm_1O-toJAZFlqu@bubble.db.elephantsql.com/eeumptim
+postgres://xxxxx:yyyyyy@zzzzz.db.elephantsql.com/xxxxx
 ```
 
-<aside markdown="1">
 The format of that is standard for database connections and breaks down to:
 
 ```
-postgres://username:password@hostname/databasename
+postgres://[USERNAME]:[PASSWORD]@[HOSTNAME]/[DATABASE_NAME]
 ```
-</aside>
 
-Once you have that long URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
+where the username and database name are typically identical.
+
+![](/assets/elephant-sql-details-page.png)
+
+<div class="bg-red-100 py-1 px-5" markdown="1">
+
+Note the "Max database size" on the Tiny Turtle free plan is only 20 MB. This is pretty small, and as your app and database grows you may hit this limit fairly quickly. In that case, follow the steps later in this guide on [Database Backups and Migrations](#database-backups-and-migrations){: target="_self" } back to Render, and upgrading to a paid plan there. Unfortunately, when your database starts to grow there's no free lunch!
+</div>
+
+Once you have that URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
 
 - Delete the current `DATABASE_URL` environment variable with the trash icon
 - Click "Add Environment Variable"
-- Create a new variable, again with the key `DATABASE_URL`, but this time with the value taken from ElephantSQL (e.g. `postgres://username:password@hostname/databasename`)
+- Create a new variable, again with the key `DATABASE_URL`, but this time with the URL value you copied from ElephantSQL
 - Click "Save Changes"
 
 ![](/assets/delete-free-db-url.png)
 {: .bleed-full }
 
-This will trigger a new deployment of your app, and now your live app will be connected to the database on ElephantSQL. At this point, you could even delete the old database from your Render dashboard:
+This will trigger a new deployment of your app, and now your live app will be connected to the database on ElephantSQL. At this point, you have disconnected from the old database originally supplied when you deployed the app with the instructions in the `render.yaml` Blueprint:
 
 ![](/assets/delete-free-db.png)
 {: .bleed-full }
 
-**Before you delete it, make sure there are no records you want to keep.** If the Render database does have some records that you are interested in keeping, then you will need to migrate those records from the Render-supplied database to your new, external ElephantSQL database. 
-
-Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. **This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step.** Your database and contents were not deleted by the step, you only deleted (well, _exchanged_) the connection to the database!
+Similar to how you connected your external database, Render also provides you with the URL to connect via the `DATABASE_URL` environment variable to the internal database that they provide. You can find that in the dashboard page for your database on Render. This is exactly the `DATABASE_URL` environment variable that you deleted in the previous step. Your database and contents were _not deleted_ by that ENV variable step, you only _exchanged_ the connection to the database!
 
 ![](/assets/internal-db-connection.png)
 {: .bleed-full }
+
+## Database Backups and Migrations
+
+Render supplies robust infrastructure for hosting applications, but ensuring the integrity and availability of your data is still important. Among other reasons, backups are important:
+
+- As a safety net, protecting your data from accidental deletions, updates, or other data corruptions. 
+- As a way to revert your database to a previous state.
+- As a way to migrate your database between platforms (e.g. ElephantSQL, Heroku, Fly, etc.)
+
+### Backups on Render
+
+You can access database backups on Render by navigating to the database on your dashboard and clicking the "Recovery" tab. On a free starter plan, you will see that backups are unavailable, but if you upgrade to a paid plan then you will see that a daily backup occurs every 24 hours, and you can download the backup (i.e. exact copy of your database) in a zipped format.
+
+### Backups on ElephantSQL
+
+To access backups on your free ElephantSQL instance, navigate to the details page for your DB, and click "Backup [db name] now". Refresh the page after a moment and you should see your new backup available for download:
+
+![](/assets/elephant-sql-backups-1.png)
+{: .bleed-full }
+
+### Migrating Database from ElephantSQL to Render
+
+If you setup your project originally with a free ElephantSQL instance with 20 MB of storage, and you want to migrate that DB to a paid plan on Render, the steps are somewhat involved. Here is a basic outline, but ask questions if you get stuck.
+
+First, you will need to make sure that PostgreSQL is installed on your local computer and available from the command line. To download and install it, [follow the official instructions for your operating system](https://www.postgresql.org/download/). Once you've done so, you should be able to run this command in your local terminal:
+
+```
+pg_dump -d postgres://xxxxx:yyyyyy@zzzzz.db.elephantsql.com/xxxxx > my_db.dump
+```
+
+Replace the `postgres://xxxxx:yyyyyy@zzzzz.db.elephantsql.com/xxxxx` with your database URL from the ElephantSQL dashboard. That command will take some time to run, but will eventually output a `my_db.dump` file locally in whatever folder you ran the command from.
+
+The `.dump` file contains all of the data and full SQL instructions to recreate your database; be it locally, or on another service like Render!
+
+If you still have the app's original database on your Render dashboard, then you can simply run this command from your local terminal in the folder you created the dump file from (if you have deleted the database, then use the Render dashboard to create a new PostgreSQL instance):
+
+```
+pg_restore --verbose  --no-acl --no-owner -d <EXTERNAL_DATABASE_URL> my_db.dump
+```
+
+Replace `<EXTERNAL_DATABASE_URL>` with the value from your Render dashboard for the database of interest:
+
+---
+
+![](/assets/external-db-connection.png)
+{: .bleed-full }
+
+---
+
+Similar to the previous steps, you will now just need to make sure that the `DATABASE_URL` environment variable in your app's dashboard is using the internal database URL from Render, rather than the URL from ElephantSQL.
+
+Once you replace that environment variable, your app should redeploy, and you should find all of the data from your ElephantSQL `.dump` on the live domain.
 
 ---
