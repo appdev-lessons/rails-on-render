@@ -176,11 +176,11 @@ where the username and database name are typically identical.
 Note the "Max database size" on the Tiny Turtle free plan is only 20 MB. This is pretty small, and as your app and database grows you may hit this limit fairly quickly. In that case, follow the steps later in this guide on [Migrating Databases](#migrating-databases){: target="_self" } back to Render, and upgrading to a paid plan there. Unfortunately, when your database starts to grow there's no free lunch!
 </div>
 
-Once you have that long string from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
+Once you have that URL from ElephantSQL copied to your clipboard, you can head to your [Render dashboard](https://dashboard.render.com/), and find the app you wish to connect the external database. On the dashboard for your app, click on "Environment" and note the `DATABASE_URL`:
 
 - Delete the current `DATABASE_URL` environment variable with the trash icon
 - Click "Add Environment Variable"
-- Create a new variable, again with the key `DATABASE_URL`, but this time with the long URL-looking value you copied from ElephantSQL
+- Create a new variable, again with the key `DATABASE_URL`, but this time with the URL value you copied from ElephantSQL
 - Click "Save Changes"
 
 ![](/assets/delete-free-db-url.png)
@@ -218,7 +218,6 @@ Database backups are critical for any long term deployment. Render supplies robu
 - On elephant
 
 ![](/assets/elephant-sql-details-page.png)
-{: .bleed-full }
 
 ## Background Scheduled Jobs
 
