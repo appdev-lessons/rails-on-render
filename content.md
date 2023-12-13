@@ -61,9 +61,9 @@ Are you seeking to deploy an app that has a database? Read the next section for 
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
-Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. 
+Databases on the free plan are deleted after **90 days**. Also, free plans are only eligible to have **one database**. If you plan to use your app beyond 90 days, or if you plan to have multiple database-backed apps, consider upgrading to a paid plan. You can always upgrade your plan at a later point, so you can begin with the free offering, and later upgrade to a $7/month starter plan, which is sufficient for most side projects.
 
-Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). The last section below details those additional steps; but you should begin by following the steps immediately below to deploy with a database, and then later you can connect the external database.
+Alternatively, you can connect an external database that will not be deleted via another free service: [ElephantSQL](https://www.elephantsql.com/). Keep reading to see details on those additional ElephantSQL steps; but you should begin by following the steps immediately below to deploy with a database, and then later you can connect the external ElephantSQL database if you so choose.
 </div>
 
 ### Update the `render.yaml` file
