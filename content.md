@@ -170,7 +170,6 @@ postgres://username:password@hostname/databasename
 </aside>
 
 ![](/assets/elephant-sql-details-page.png)
-{: .bleed-full }
 
 <div class="bg-red-100 py-1 px-5" markdown="1">
 
