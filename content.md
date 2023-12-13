@@ -193,6 +193,13 @@ Similar to how you connected your external database, Render also provides you wi
 
 ## Database Backups
 
+Database backups are critical for any long term deployment. Render supplies robust infrastructure for hosting applications, but ensuring the integrity and availability of your data is still important. Among other reasons, backups are important:
+
+- As a safety net, protecting your data from accidental deletions, updates, or other data corruptions. 
+- As a way to revert your database to a previous state.
+- As a way to migrate your database to another platform (e.g. ElephantSQL, Heroku, Fly, etc.)
+
+### Backups on Render
 
 - On render
 - On Elephant
