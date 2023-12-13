@@ -248,10 +248,4 @@ Similar to the previous steps, you will now just need to make sure that the `DAT
 
 Once you replace that environment variable, your app should redeploy, and you should find all of the data from your ElephantSQL `.dump` on the live domain.
 
-## Background Scheduled Jobs
-
-
-
-## Continuous Deployment
-
 ---
