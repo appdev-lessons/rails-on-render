@@ -200,7 +200,7 @@ Similar to how you connected your external database, Render also provides you wi
 
 ## Database Backups
 
-Database backups are critical for any long term deployment. Render supplies robust infrastructure for hosting applications, but ensuring the integrity and availability of your data is still important. Among other reasons, backups are important:
+Render supplies robust infrastructure for hosting applications, but ensuring the integrity and availability of your data is still important. Among other reasons, backups are important:
 
 - As a safety net, protecting your data from accidental deletions, updates, or other data corruptions. 
 - As a way to revert your database to a previous state.
@@ -208,8 +208,13 @@ Database backups are critical for any long term deployment. Render supplies robu
 
 ### Backups on Render
 
-- On render
-- On Elephant
+You can access database backups on Render by navigating to the database on your dashboard and clicking the "Recovery" tab. On a free starter plan, you will see that backups are unavailable, but if you upgrade to a paid plan then you will see that a daily backup occurs every 24 hours, and you can download the backup (i.e. exact copy of your database) in a zipped format.
+
+### Backups on ElephantSQL
+
+To access backups on your free ElephantSQL instance, navigate to the details page for your DB, and click "Backup [db name] now". Refresh the page after a moment and you should see your new backup available for download:
+
+![](/assets/elephant-sql-backups-1.png)
 
 
 ## Migrating Databases
