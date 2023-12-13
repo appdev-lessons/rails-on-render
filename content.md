@@ -158,16 +158,16 @@ First follow the steps in [this guide from ElephantSQL](https://www.elephantsql.
 - After you complete the steps, you should be brought to a dashboard page where you can find a URL that looks something like this:
 
 ```
-postgres://eeumptim:hs9gFCEPdot6iZyT7Zm_1O-toJAZFlqu@bubble.db.elephantsql.com/eeumptim
+postgres://xxxxx:yyyyyy@zzzzz.db.elephantsql.com/xxxxx
 ```
 
-<aside markdown="1">
 The format of that is standard for database connections and breaks down to:
 
 ```
-postgres://username:password@hostname/databasename
+postgres://[USERNAME]:[PASSWORD]@[HOSTNAME]/[DATABASE_NAME]
 ```
-</aside>
+
+where the username and database name are typically identical.
 
 ![](/assets/elephant-sql-details-page.png)
 
